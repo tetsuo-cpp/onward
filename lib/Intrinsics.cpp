@@ -6,7 +6,7 @@ namespace onward {
 
 std::vector<
     std::pair<std::string, std::function<void(std::vector<uint64_t> &)>>>
-    intrinsic_words = {{"+",
+    gIntrinsicWords = {{"+",
                         [](std::vector<uint64_t> &stack) {
                           const auto lhs_operand = stack.back();
                           stack.pop_back();

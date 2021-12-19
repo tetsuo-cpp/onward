@@ -29,7 +29,7 @@ std::vector<std::string> ParseWords(std::string_view word_str) {
 } // namespace
 
 Engine::Engine() : state(EngineState::kInterpretationState) {
-  for (const auto &intrinsic : intrinsic_words) {
+  for (const auto &intrinsic : gIntrinsicWords) {
     dict.RegisterIntrinsic(intrinsic.first, intrinsic.second);
   }
 }
