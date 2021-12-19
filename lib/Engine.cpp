@@ -28,7 +28,7 @@ std::vector<std::string> ParseWords(std::string_view word_str) {
 
 } // namespace
 
-Engine::Engine() {
+Engine::Engine() : state(EngineState::kInterpretationState) {
   for (const auto &intrinsic : intrinsic_words) {
     dict.RegisterIntrinsic(intrinsic.first, intrinsic.second);
   }
@@ -42,6 +42,31 @@ void Engine::ExecWords(std::string_view src) {
 }
 
 void Engine::ExecWord(const std::string &word) {
+  if (word == ":") {
+    if (state == EngineState::kCompilationState) {
+      // TODO: Return an error
+    }
+    state = EngineState::kCompilationState;
+    return;
+  }
+  if (word == ";") {
+    if (state == EngineState::kInterpretationState) {
+      // TODO: Return an error
+    } else if (compile_words.empty()) {
+      // TODO: Return an error
+    }
+    // Compile the custom word
+    auto word_name = compile_words.front();
+    compile_words.erase(compile_words.begin());
+    dict.RegisterWord(std::move(word_name), compile_words);
+    state = EngineState::kInterpretationState;
+    compile_words.clear();
+    return;
+  }
+  if (state == EngineState::kCompilationState) {
+    compile_words.push_back(word);
+    return;
+  }
   // Check the dictionary first
   auto entry = dict.GetWord(word);
   if (entry) {

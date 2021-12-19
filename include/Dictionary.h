@@ -22,7 +22,7 @@ class Dictionary {
 public:
   Dictionary() = default;
 
-  void RegisterWord(std::string &&word_name, std::vector<std::string> &&impl);
+  void RegisterWord(std::string &&word_name, std::vector<std::string> impl);
   void
   RegisterIntrinsic(std::string word_name,
                     std::function<void(std::vector<uint64_t> &)> intrinsic);

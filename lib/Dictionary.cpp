@@ -3,7 +3,7 @@
 namespace onward {
 
 void Dictionary::RegisterWord(std::string &&word_name,
-                              std::vector<std::string> &&impl) {
+                              std::vector<std::string> impl) {
   dict.emplace(std::move(word_name), CompoundWord({std::move(impl)}));
 }
 

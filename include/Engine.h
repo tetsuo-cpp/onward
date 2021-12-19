@@ -7,6 +7,11 @@
 
 namespace onward {
 
+enum class EngineState {
+  kInterpretationState,
+  kCompilationState,
+};
+
 class Engine {
 public:
   Engine();
@@ -18,6 +23,8 @@ private:
   void ExecWord(const std::string &);
   std::vector<uint64_t> stack;
   Dictionary dict;
+  EngineState state;
+  std::vector<std::string> compile_words;
 };
 
 } // namespace onward
