@@ -15,8 +15,11 @@ cmake -B build/ -S .
 # Build
 cmake --build build/ -j
 
-# Run interpreter
+# Run interpreter in interactive mode
 ./build/tools/onward
+
+# Run interpreter on FORTH script
+./build/tools/onward [file]
 ```
 
 ## Features
